@@ -29,8 +29,7 @@ function sendGiveWebhook(source, targetId, model, plate)
                 }
             },
             footer = {
-                text = "Command: /givecar • Fire Scripts",
-                --icon_url = "https://i.imgur.com/zi6GdIx.png"
+                text = "Command: /givecar • Fire Scripts"
             },
             timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ")
         }}
@@ -63,8 +62,7 @@ function sendRemoveWebhook(source, targetId, plate)
                 }
             },
             footer = {
-                text = "Command: /removecar • Fire Scripts",
-                --icon_url = "https://i.imgur.com/zi6GdIx.png"
+                text = "Command: /removecar • Fire Scripts"
             },
             timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ")
         }}
@@ -103,8 +101,7 @@ function sendEveryCarWebhook(source, targetId, vData)
                 }
             },
             footer = {
-                text = "Command: /listcars • Fire Scripts",
-                --icon_url = "https://i.imgur.com/zi6GdIx.png"
+                text = "Command: /listcars • Fire Scripts"
             },
             timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ")
         }}
