@@ -15,7 +15,29 @@ function GeneratePlate()
 end
 
 function SendNoti(id, text, kind)
-    TriggerClientEvent('QBCore:Notify', id, text, kind, 5000)
+    if Config.NotiType == "qb" then
+        TriggerClientEvent('QBCore:Notify', id, text, kind, 5000)
+    elseif Config.NotiType == "ox_lib" then
+        TriggerClientEvent('ox_lib:notify', id, { title = "Vehicle Management", type = kind, description = text,  position = 'top' })
+    elseif Config.NotiType == "qs-phone" then
+        TriggerClientEvent('qs-phone:client:notify', id, { title = "Vehicle Management", description = text, type = kind, icon = "car" })
+        --[[
+
+        IF THAT DOESN'T WORK, TRY THIS:
+        exports['qs-smartphone-pro']:SendTempNotificationOld({
+            title = 'Vehicle Management',
+            text = text,
+            app = 'Garage',
+            timeout = 5000,
+            disableBadge = true, -- Disables the badge on the app icon.
+        })
+
+        ]]
+    elseif Config.NotiType == "qs-notify" then
+        exports['qs-notify']:Alert(text, 5000, kind)
+    else
+        print("Notification type not recognized: " .. Config.NotiType)
+    end
 end
 
 QBCore.Commands.Add("givecar", "Give a car to a player", {
@@ -217,17 +239,4 @@ AddEventHandler("yourScript:giveCar", function(targetId, vehicleModel)
     -- Tell the client to spawn the vehicle
     TriggerClientEvent("yourScript:spawnVehicle", target, vehicleModel)
 end)
-
--- QS-Notify
-function SendTextMessage(msg, type)
-    if type == 'inform' then
-        exports['qs-notify']:Alert(msg, 1500, 'info')
-    end
-    if type == 'error' then
-        exports['qs-notify']:Alert(msg, 1500, 'error')
-    end
-    if type == 'success' then
-        exports['qs-notify']:Alert(msg, 1500, 'success')
-    end
-end
 ]]

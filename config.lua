@@ -9,7 +9,7 @@ Config = {
 
     -- Keys and Notifications
     Keys = "qb-vehiclekeys", -- "wasabi_carlock", "qb-vehiclekeys"
-    NotiType = "qb-Notify", -- "qb-Notify", "qs-phone", "ox_lib"
+    NotiType = "qb-Notify", -- "qb-Notify", "qs-phone", "ox_lib", "qs-notify"
 
     -- Discord Webhooks | Leave empty to disable
     GiveCarWebhook = "",
