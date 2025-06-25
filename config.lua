@@ -1,16 +1,18 @@
-Config = {}
+Config = {
 
--- Default vehicle state (0 = in garage, 1 = out/spawned)
-Config.DefaultState = 0
+    -- Vehicle
+    DefaultState = 0, -- Default vehicle state (0 = in garage, 1 = out/spawned)
+    PlateLength = 8, -- Number of characters for generated license plate
 
--- Number of characters for generated license plate
-Config.PlateLength = 8
+    -- Command Settings
+    CommandType = "qb", -- "qb", "ox", "standalone"
 
--- Keys Script
-Config.Keys = "qb-vehiclekeys" -- "wasabi_carlock", "qb-vehiclekeys"
+    -- Keys and Notifications
+    Keys = "qb-vehiclekeys", -- "wasabi_carlock", "qb-vehiclekeys"
+    NotiType = "qb-Notify", -- "qb-Notify", "qs-phone", "ox_lib"
 
--- Toggle server-side Discord logging
-Config.EnableLogging = true
-Config.GiveCarWebhook = ""
-Config.RemoveCarWebhook = ""
-Config.EveryCarWebhook = ""
+    -- Discord Webhooks | Leave empty to disable
+    GiveCarWebhook = "",
+    RemoveCarWebhook = "",
+    EveryCarWebhook = ""
+}
