@@ -21,20 +21,8 @@ function SendNoti(id, text, kind)
         TriggerClientEvent('ox_lib:notify', id, { title = "Vehicle Management", type = kind, description = text,  position = 'top' })
     elseif Config.NotiType == "qs-phone" then
         TriggerClientEvent('qs-phone:client:notify', id, { title = "Vehicle Management", description = text, type = kind, icon = "car" })
-        --[[
-
-        IF THAT DOESN'T WORK, TRY THIS:
-        exports['qs-smartphone-pro']:SendTempNotificationOld({
-            title = 'Vehicle Management',
-            text = text,
-            app = 'Garage',
-            timeout = 5000,
-            disableBadge = true, -- Disables the badge on the app icon.
-        })
-
-        ]]
-    elseif Config.NotiType == "qs-notify" then
-        exports['qs-notify']:Alert(text, 5000, kind)
+    elseif Config.NotiType == "qs-interface" then
+        TriggerClientEvent('interface:notification', id, text, "Garage", 5000, "fa-regular fa-truck")
     else
         print("Notification type not recognized: " .. Config.NotiType)
     end
@@ -183,60 +171,3 @@ QBCore.Commands.Add("listcars", "Shows the target's vehicles", {
         end
     end)
 end, "god")
-
---[[
--- CLIENT.LUA:
-RegisterCommand("givecar", function(source, args, rawCommand)
-    -- Send the command to the server with the arguments
-    TriggerServerEvent("yourScript:giveCar", args[1], args[2])
-end, false)
-
--- Suggestion for the /givecar command
-TriggerEvent('chat:addSuggestion', '/givecar', 'Give a car to a player', {
-    { name = 'id', help = 'Player\'s ID' },
-    { name = 'model', help = 'Vehicle model name (e.g., sultan, buffalo)' }
-})
-
-RegisterNetEvent("yourScript:spawnVehicle")
-AddEventHandler("yourScript:spawnVehicle", function(vehicleModel)
-    local model = GetHashKey(vehicleModel)
-
-    RequestModel(model)
-    while not HasModelLoaded(model) do
-        Wait(100)
-    end
-
-    local playerPed = PlayerPedId()
-    local coords = GetEntityCoords(playerPed)
-    local vehicle = CreateVehicle(model, coords.x, coords.y, coords.z, GetEntityHeading(playerPed), true, false)
-
-    TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
-    SetEntityAsMissionEntity(vehicle, true, true)
-
-    if Config.Debug then
-        print("[DEBUG] Spawned vehicle:", vehicleModel)
-    end
-end)
-
--- SERVER.LUA:
-RegisterNetEvent("yourScript:giveCar")
-AddEventHandler("yourScript:giveCar", function(targetId, vehicleModel)
-    local src = source
-    local target = tonumber(targetId)
-    if not target or not vehicleModel then
-        print("Invalid arguments")
-        return
-    end
-
-    -- Optional: check if the player exists
-    if GetPlayerName(target) == nil then
-        TriggerClientEvent("chat:addMessage", src, {
-            args = { "^1Error", "Player not found." }
-        })
-        return
-    end
-
-    -- Tell the client to spawn the vehicle
-    TriggerClientEvent("yourScript:spawnVehicle", target, vehicleModel)
-end)
-]]
