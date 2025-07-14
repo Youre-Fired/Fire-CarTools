@@ -1,7 +1,6 @@
 Config = {
 
     -- Vehicle
-    DefaultState = 0, -- Default vehicle state (0 = in garage, 1 = out/spawned)
     PlateLength = 8, -- Number of characters for generated license plate
 
     -- Keys and Notifications

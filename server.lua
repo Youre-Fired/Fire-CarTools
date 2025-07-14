@@ -59,7 +59,7 @@ QBCore.Commands.Add("givecar", "Give a car to a player", {
         GetHashKey(model),
         json.encode(vehicleProps),
         plate,
-        Config.DefaultState
+        0
     })
     
     if Config.Keys == "wasabi_carlock" then
